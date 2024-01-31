@@ -8,8 +8,9 @@ from my_robot_interfaces.msg import LedStateArray
 class LedPanelNode(Node):
     def __init__(self):
         super().__init__("led_panel")
+        self.declare_parameter("led_states",[0,0,0])
 
-        self.led_states = [0,0,0]
+        self.led_states = self.get_parameter("led_states").value
 
         self.server  = self.create_service(SetLed,"set_led",self.callback_set_led)
         self.get_logger().info("Set led server foi iniciado!")
