@@ -7,8 +7,7 @@
     <xacro:property name="wheel_radius" value="0.1"></xacro:property>
     <xacro:property name="wheel_length" value="0.05"></xacro:property>
 
-    <link name="base_footprint">
-    </link>
+    <link name="base_footprint"></link>
 
     <link name="base_link">
         <visual>
@@ -18,17 +17,35 @@
             <origin xyz="0 0 ${base_height/2.0}" rpy="0 0 0"></origin>
             <material name="green"></material>
         </visual>
+        <collision>
+            <geometry>
+                <box size="${base_length} ${base_width} ${base_height}"></box>
+            </geometry>
+            <origin xyz="0 0 ${base_height/2.0}" rpy="0 0 0"></origin>   
+        </collision>
+        <xacro:box_inertia mass="5.0" length="${2*base_length}" width="${2*base_width}" 
+                           height="${2*base_height}" xyz="0 0 ${base_height/2.0}" rpy="0 0 0">
+        </xacro:box_inertia>
     </link>
 
     <xacro:macro name="wheel_link" params="prefix">
         <link name="${prefix}_wheel_link">
             <visual>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_length}"></cylinder>
-            </geometry>
-            <origin xyz="0 0 0" rpy="${pi/2.0} 0 0"></origin>
-            <material name="grey"></material>
-        </visual>   
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_length}"></cylinder>
+                </geometry>
+                <origin xyz="0 0 0" rpy="${pi/2.0} 0 0"></origin>
+                <material name="grey"></material>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_length}"></cylinder>
+                </geometry>
+                <origin xyz="0 0 0" rpy="${pi/2.0} 0 0"></origin>
+            </collision>  
+            <xacro:cylinder_inertia mass="1.0" radius="${2*wheel_radius}" length="${2*wheel_length}" 
+                                    xyz="0 0 0" rpy="${pi/2.0} 0 0">
+            </xacro:cylinder_inertia> 
         </link>
     </xacro:macro>
 
@@ -43,6 +60,14 @@
             <origin xyz="0 0 0" rpy="0 0 0"></origin>
             <material name="grey"></material>
         </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${wheel_radius/2.0}"></sphere>       
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"></origin>
+        </collision>
+        <xacro:sphere_inertia mass="0.5" radius="${wheel_radius}" xyz="0 0 0" rpy="0 0 0">
+        </xacro:sphere_inertia>
     </link>
 
     <joint name="base_right_wheel_joint" type="continuous">

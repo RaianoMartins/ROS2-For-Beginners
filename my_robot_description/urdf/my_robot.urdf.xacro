@@ -3,5 +3,7 @@
 
     <xacro:include filename="common_properties.urdf.xacro"></xacro:include>
     <xacro:include filename="mobile_base.urdf.xacro"></xacro:include>
+    <xacro:include filename="mobile_base_gazebo.urdf.xacro"></xacro:include>
+    <xacro:include filename="camera.urdf.xacro"></xacro:include>
 
 </robot>

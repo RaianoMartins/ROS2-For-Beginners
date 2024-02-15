@@ -11,11 +11,10 @@ find_package(ament_cmake REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
-install(DIRECTORY
-  launch
+install(
+  DIRECTORY launch rviz worlds
   DESTINATION share/${PROJECT_NAME}
 ) #instala o diretorio launch e todo seu conteúdo
-
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
